@@ -17,11 +17,23 @@ export default {
   },
   methods: {
     onSubmitted(postData) {
-      axios.post('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts.json', postData)
+      /* 6) Here I'm sending to the database the new post the user 
+      entered in the form. The new post is received from the AdminPostForm
+      in the property postData. */
+      /* 7) Instead of just sending postData to the database, let's send
+      a new object. Use the spread operator to spread all the data
+      from postData and we add a new property, updatedDate: new Date(),
+      which we set to new Date() */
+      axios.post('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts.json', {...postData, updatedDate: new Date()})
         .then(result => console.log(result))
         .catch(e => console.log(e))
     }
   }
+  /* 8) Go to firebase, remove the post crated
+  earlier and then go to the app and add a new
+  post. IMPORTANT: the date field is not included
+  in the form. It will be seen in the database
+  with the date the user entered the post. */
 };
 </script>
 
