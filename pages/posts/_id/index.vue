@@ -56,12 +56,7 @@ export default {
 
       .catch(e => context.error(e))
   }
-/* 5) Now, go to firebase and delete the exisiting post.
-Enter a new post from the app and go to firebase again.
-In the post entry the property updatedDate is available.
-Now, go to the main page or the posts page, click on a 
-post and the data enter for that is displayed.
- */
+
 };
 </script>
 

@@ -31,9 +31,14 @@ export default {
   }
   /* 8) Go to firebase, remove the post crated
   earlier and then go to the app and add a new
-  post. IMPORTANT: the date field is not included
+  post. Go to firebase again. In the post entry the 
+  property updatedDate is available.
+  IMPORTANT: the date field is not included
   in the form. It will be seen in the database
-  with the date the user entered the post. */
+  with the date the user entered the post.
+  Now, go to the main page or the posts page, click on a 
+  post and the data enter for that is displayed.
+ */ 
 };
 </script>
 
