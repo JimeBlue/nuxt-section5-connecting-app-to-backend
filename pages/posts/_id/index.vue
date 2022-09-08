@@ -16,12 +16,11 @@
 </template>
 
 <script>
-/* 1) Import axios */
 import axios from 'axios'
 
 export default {
-  async asyncData(context) {
-    return await axios.get('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts/' +  context.params.id  + '.json')
+   asyncData(context) {
+    return axios.get('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts/' +  context.params.id  + '.json')
       .then(res => {
         return {
           loadedPost: res.data
