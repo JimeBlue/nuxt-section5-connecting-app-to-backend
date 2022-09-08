@@ -5,8 +5,6 @@
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-       <!-- 2)Send posts to component where they
-      will be displayed as prop. Next step in the _postId page. -->
       <PostList isAdmin :posts="loadedPosts"/>
     </section>
   </div>
@@ -15,17 +13,13 @@
 <script>
 import PostList from '@/components/Posts/PostList'
 import AppButton from '@/components/UI/AppButton'
-/* EXPLANATION: the assignment: get all the posts from the
-store and send them to the PostList component, where they
-will be displayed. Also, in the _postId page,
-fetch all the posts using asyncDdata*/
+
 export default {
   layout: 'admin',
   components: {
     PostList,
     AppButton
   },
-  /* 1) Get posts from store */
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts
