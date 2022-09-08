@@ -8,23 +8,31 @@
 
 <script>
 import AdminPostForm from '@/components/Admin/AdminPostForm'
+/* 3) Import axios */
+import axios from 'axios'
 
 export default {
   layout: 'admin',
   components: {
     AdminPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: 'Maximilian',
-        title: 'My awesome Post',
-        content: 'Super amazing, thanks for that!',
-        thumbnailLink: 'https://static.pexels.com/photos/270348/pexels-photo-270348.jpeg'
-      }
-    }
+  /* 4) fetch all posts from database using asyncData and getting
+  the specific id. */
+  asyncData(context) {
+    return  axios.get('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts/' +  context.params.postId  + '.json')
+      .then(res => {
+        return {
+          loadedPost: res.data
+        }
+      })
+
+      .catch(e => context.error(e))
   }
 }
+/* 5) Now, if I go to my app and navigate to
+the admin section I will be able to see the 
+post. When clicking on it I'll see the form
+to edit it. */
 </script>
 
 <style scoped>
