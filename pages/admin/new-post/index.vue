@@ -7,35 +7,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import AdminPostForm from "@/components/Admin/AdminPostForm";
 
 export default {
-  layout: 'admin',
+  layout: "admin",
   components: {
     AdminPostForm
   },
   methods: {
+      /* 12) Dispatch the action addPost to the store,
+      passing the postData. Since I return axios in the store,
+      I can chain .then to be inform when this async action
+      is finished. So, once I´m done, I execute an arrow
+      function in which I redirect the user to the admin page.   */
     onSubmitted(postData) {
-      /* 6) Here I'm sending to the database the new post the user 
-      entered in the form. The new post is received from the AdminPostForm
-      in the property postData. */
-      /* 7) Instead of just sending postData to the database, let's send
-      a new object. Use the spread operator to spread all the data
-      from postData and we add a new property, updatedDate: new Date(),
-      which we set to new Date() */
-      axios.post('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts.json', {...postData, updatedDate: new Date()})
-        .then(result => console.log(result))
-        .catch(e => console.log(e))
+      this.$store.dispatch("addPost", postData).then(() => {
+        this.$router.push("/admin");
+      });
     }
   }
-  /* 8) Go to firebase, remove the post crated
-  earlier and then go to the app and add a new
-  post. IMPORTANT: the date field is not included
-  in the form. It will be seen in the database
-  with the date the user entered the post. */
+  /* 13) Now test it. If we go to the app and add a new post,
+  we'll be redirected to the admin section where We'll
+  see the post we've just added in the list. Next step in
+  the store */
 };
 </script>
+
 
 <style scoped>
 .new-post-form {

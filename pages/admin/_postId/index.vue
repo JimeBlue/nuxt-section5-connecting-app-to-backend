@@ -21,7 +21,8 @@ export default {
     return  axios.get('https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts/' +  context.params.postId  + '.json')
       .then(res => {
         return {
-          loadedPost: res.data
+          /* 17) Create a new object containing the loadedPost and its id. */
+         loadedPost: { ...res.data, id: context.params.postId },
         }
       })
 
@@ -29,16 +30,12 @@ export default {
   },
     methods: {
     onSubmitted(editedPost) {
-      axios
-      .put(
-        "https://nuxt-blog-abebd-default-rtdb.europe-west1.firebasedatabase.app/posts/" +
-          this.$route.params.postId +
-          ".json", editedPost
-      )
-      .then(res => {
-       this.$router.push("/admin")
-      })
-      .catch(e => console.log(e));
+      /* 15) Dispatch the editPost action to the store,
+      passing the editedPost. In the then block, redirec the
+      user tothe admin page.  Next step in the store. */
+        this.$store.dispatch("editPost", editedPost).then(() => {
+        this.$router.push("/admin");
+      });
     }
   }
 }
